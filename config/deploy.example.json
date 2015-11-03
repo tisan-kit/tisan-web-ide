@@ -4,7 +4,8 @@
   "listenPort" :8000, 
   "redis":{
     "host":"localhost",
-    "port":9000
+    "port":9000,
+    "sessionSecret": "yoursecret"
   },
   "mysql" : {
     "connectionLimit" : 10,

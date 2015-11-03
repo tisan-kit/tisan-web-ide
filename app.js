@@ -33,10 +33,10 @@ app.use(ExpressSession({
   saveUninitialized: true,
   store: new RedisStore({host:config.redis.host,port:config.redis.port}),
   rolling: true,
-  secret: 'disan-2015',
+  secret: config.redis.sessionSecret,
   cookie: {
     maxAge: 1000*60*60*24*7
-  }   
+  }
 }));// 
 
 //TODO 写法有问题
@@ -99,8 +99,8 @@ if (app.get('env') === 'development') {
 
 var server = http.createServer(app);
 
-server.listen(config.listen_port,function(result){
-  console.log('Listen on port '+config.listen_port); 
+server.listen(config.listenPort,function(result){
+  console.log('Listen on port '+config.listenPort); 
 })
 
 module.exports = app;
