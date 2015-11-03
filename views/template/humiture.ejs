@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/iotboard/widgets/humiture/humiture.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/humiture/humiture.widget.min.js"></script>
+<script type="text/html" id="template-humiture">
+	<#if(title){#>
+		<div class="title"><#=title#></div>
+	<#}#>
+<div class="colorpicker">
+</div>
+<div class="preview">
+    <div class="container">
+        <div class="de">
+            <div class="den humiture">
+              <div class="dene">
+                <div class="denem">
+                  <div class="deneme humiture-wrap"><w class="humiture-text"><#=status.humiture#></w><span></span><strong>%</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-refresh am-btn-success">REFRESH</button>
+<div class="clf"></div>
+</script>

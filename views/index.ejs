@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/page/common.css" rel="stylesheet">
+<link href="/css/page/index.css" rel="stylesheet">
+<script src="/js/page/common.js"></script>
+</head>
+
+<body>
+<%include navigation.ejs%>
+<div class="index">
+	<!--
+	<div class="index-tisan"></div>
+	<div class="board-wrap"><div class="board"></div></div>
+	-->
+</div>
+<article class="wwdc15">
+	<span class="large-circles">
+		<div class="large circle one"></div>
+		<div class="large circle two"></div>
+		<div class="large circle three"></div>
+		<div class="large circle four"></div>
+		<div class="large circle five"></div>
+		<div class="large circle six"></div>
+		<div class="large circle seven"></div>
+		<div class="large circle eight"></div>
+	</span>
+	<span class="small-shapes">
+		<div class="small circle one"></div>
+		<div class="small squircle two"></div>
+		<div class="small circle three"></div>
+		<div class="small squircle four"></div>
+		<div class="small circle five"></div>
+		<div class="small squircle six"></div>
+		<div class="small circle seven"></div>
+		<div class="small squircle eight"></div>
+	</span>
+	<span class="content-squircle">
+		<div class="large squircle one"></div>
+	</span>
+	<div class="large squircle two">
+		<div class="content">
+			<div class="index-tisan"></div>
+			<h3 style="margin-top: 50px;margin-bottom: 60px;">可产品化的开源物联网开发板</h3>
+			<div class="buttons">
+				<button class="btn btn-details" onclick="location.href='/about'">查看详情</button>
+				<button class="btn btn-pay" style="margin-left:12px" onclick="window.open('https://izhongchou.taobao.com/dreamdetail.htm?spm=a215p.1472805.0.0.854OuF&id=10045134')">立即购买</button>
+			</div>
+		</div>
+	</div>
+</article>
+
+</body>
+<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script>
+		var ua=navigator.userAgent;
+        if(ua.indexOf('MSIE')>=0||ua.indexOf('Trident')>=0){
+			location.href='/about';
+		}
+</script>
+</html>

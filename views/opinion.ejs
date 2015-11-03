@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/page/file_upload.css" rel="stylesheet">
+        <link href="/css/page/common.css" rel="stylesheet">
+        <script src="/js/page/common.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <%include navigation.ejs%>
+            <div class="row margin-navigation">
+                <div class="col-md-2 col-md-offset-1">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                        <li role="presentation"><a href="/user/account">帐号</a></li> 
+                        <li role="presentation" style="display:none"><a href="#">密码</a></li>
+                        <li role="presentation" style="display:none"><a href="#">消息</a></li>
+                        <li role="presentation"><a href="/user/hardware">开发板设置</a></li>
+                        <li role="presentation" class="active"><a href="/user/opinion">我要提意见</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-7 col-md-offset-1">
+                    <address style="line-height:2;font-size:16px;marginup">
+                        <h4>tisan正在逐步的改进和完善，我们非常欢迎您的宝贵意见!</h4>
+                        如果您对我们的开发板或平台有任何改进意见，欢迎联系我们:<br>
+                    </address>
+                    <br>
+                    <address>
+                        <strong>QQ群:</strong><br>
+                        230508748 
+                        <br>
+                        <br>
+                        <strong>联系邮箱</strong><br>
+                        <a href="mailto:#">tisan@pandocloud.com</a>
+                    </address>
+                </div>
+
+                <div class="col-md-1">
+                </div>
+            </div>
+
+            <div class="modal fade bs-example-modal-lg cutting-avant-fix-box" tabindex="-1" role="dialog" aria-labelledby="avant">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="avant">修改图片</h4> </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6"> 
+                                    <div class="user head-portrait-preview" style="height: 270px;">
+                                        <div class="head-portrait-preview-200"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="userface"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</html>

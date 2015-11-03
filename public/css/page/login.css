@@ -1,0 +1,44 @@
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  border: 2px solid #dce4ec;
+  color: #34495e;
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  padding: 8px 0 9px 10px;
+  text-indent: 1px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.login-screen {
+  background-color: #1abc9c;
+  min-height: 317px;
+  padding: 123px 199px 33px 306px;
+}
+.login-form {
+  background-color: #eceff1;
+  border-radius: 6px;
+  padding: 24px 23px 20px;
+  position: relative;
+}
+.login-form .control-group {
+  margin-bottom: 6px;
+  position: relative;
+}
+.margintop{
+  margin-top:100px;
+}
+.form-control-lg{
+  height:50px; !important
+}
+.marginup{
+  margin-top:40px;
+}
+.login-btn{
+  widht:80%;
+}
+.wrong-tag{
+  margin-left:0px;
+}

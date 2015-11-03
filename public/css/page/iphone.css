@@ -1,0 +1,56 @@
+.iphone {
+  background: #aaa;
+  border-radius: 40px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  -webkit-transform-origin-y:0;
+  -webkit-transform:scale(0.8);
+  height: 666px;
+  margin: auto;
+  max-width: 350px;
+  padding: 80px 15px;
+  position: relative;
+}
+.iphone:before {
+  background: rgba(0,0,0,0.35);
+  border-radius: 4px;
+  content: " ";
+  height: 8px;
+  left: 50%;
+  margin-left: -30px;
+  position: absolute;
+  top: 45px;
+  width: 60px;
+  z-index: 99;
+}
+.iphone:after {
+  background: rgba(0,0,0,0.35);
+  border: 4px solid rgba(255,255,255,0.6);
+  border-radius: 50%;
+  bottom: 11px;
+  content: " ";
+  height: 50px;
+  left: 50%;
+  margin-left: -29px;
+  position: absolute;
+  width: 50px;
+  z-index: 99;
+}
+.screen {
+  background: #fff;
+  border-radius: 2px;
+  width:320px;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
+}
+.screen:after {
+  clear: both;
+  content: " ";
+  display: table;
+}
+* {
+  *   box-sizing: border-box;
+  *   }

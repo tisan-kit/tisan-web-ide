@@ -1,0 +1,81 @@
+<div class="notification-wrap">
+    <div class="notification">
+        <div class="notification-title">
+        </div>
+        <div class="notification-tabs">
+        </div>
+        <div class="notification-content">
+        </div>
+        <div class="notification-buttons">
+            <button class="notification-button btn-notification-no">取消</button>
+            <button class="notification-button btn-notification-yes">确定</button>
+        </div>
+    </div>
+</div>
+<script>
+var notification={};
+notification.dom=$(".notification-wrap");
+notification.dialogDom=$(".notification");
+notification.titleDom=$(".notification-title");
+notification.contentDom=$(".notification-content");
+notification.btnYes=$(".btn-notification-yes");
+notification.btnNo=$(".btn-notification-no");
+notification.tabs=$(".notification-tabs");
+notification.incontentTabs=$(".incontent-tabs");
+notification.hide=function(){
+	//notification.dom.hide();
+	notification.dom.css('visibility','hidden');
+	notification.dom.css('opacity','0.01');
+	notification.dom.css('-webkit-transform','scale(2)');
+}
+
+notification.show=function(data){
+	if(data.size){
+		notification.dialogDom.removeClass('m');
+		notification.dialogDom.removeClass('xm');
+		notification.dialogDom.removeClass('l');
+		notification.dialogDom.removeClass('flat');
+		notification.dialogDom.removeClass('m-cube');
+		notification.dialogDom.addClass(data.size);
+	}
+	notification.dom.css('-webkit-transform','scale(1)');
+	notification.dom.css('visibility','visible');
+	notification.dom.css('opacity','1');
+	if(data.title){
+		notification.titleDom.html(data.title);
+	}
+	//notification.dom.css('display','-webkit-flex');
+	notification.dom.attr('mode',data.mode?data.mode:'none');
+	if(data.content){
+		notification.contentDom.html(data.content);
+	}
+
+	notification.tabs.html('');
+	if(data.mode=='tabs'){
+		var contentHTML='';
+		for(var i =0;i<data.tabs.length;++i){
+			notification.tabs.append('<div class="notification-tab">'+data.tabs[i].title+'</div>');
+			contentHTML+='<div class="notification-tab-content notification-tab-index'+i+'">'+data.tabs[i].content+'</div>';
+		}
+		notification.contentDom.html(contentHTML);
+		$('.notification-tab').on('click',function(){
+			$('.notification-tab').removeClass('active');
+			$(this).addClass('active');
+			$('.notification-tab-content').hide();
+			$('.notification-tab-index'+$(this).index()).show();
+		});
+		$('.notification-tab').first().click();
+	}
+	notification.btnYes.unbind();
+	notification.btnNo.unbind();
+	notification.btnYes.on('click',data.btnYesCallback?data.btnYesCallback:notification.hide);
+	notification.btnNo.on('click',data.btnNoCallback?data.btnNoCallback:notification.hide);
+
+	$('.incontent-tab').on('click',function(){
+		$('.incontent-tab').removeClass('active');
+		$('.incontent-tab-content').hide();
+		$(this).addClass('active');
+		$('.incontent-tab-index'+$(this).index()).show();
+	});
+}
+</script>

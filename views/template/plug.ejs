@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/iotboard/widgets/plug/plug.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/plug/plug.widget.min.js"></script>
+<script type="text/html" id="template-plug">
+<div class="plug-title"><#=title#></div>
+<div class="plug-wrap">
+    <input type="checkbox" class="slider-v1" <#=status["on"]?'checked':''#> id="autogen-s<#=cnt#>" />
+    <label for="autogen-s<#=cnt#>"></label>
+</div>
+<div class="clf"></div>
+  </script>
+  <script type="text/html" id="template-text">
+<#if(title){#>
+<div class="title"><#=title#></div>
+<#}#>
+</script>

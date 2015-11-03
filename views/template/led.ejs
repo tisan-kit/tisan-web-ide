@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/iotboard/widgets/led/led.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/led/led.widget.min.js"></script>
+<script type="text/html" id="template-led">
+	<#if(title){#>
+		<div class="title"><#=title#></div>
+	<#}#>
+<div class="colorpicker">
+    <canvas class="picker" width="200" height="200"></canvas>
+</div>
+<div class="preview">
+    <div>
+        <label>R</label>
+        <input type="text" class="rPrev" style="background-color:rgba(<#=status["red"]#>,0,0,1)"/>
+    </div>
+    <div>
+        <label>G</label>
+        <input type="text" class="gPrev" style="background-color:rgba(0,<#=status["red"]#>,0,1)"/>
+    </div>
+    <div>
+        <label>B</label>
+        <input type="text" class="bPrev" style="background-color:rgba(0,0,<#=status["red"]#>,1)"/>
+    </div>
+</div>
+<div class="clf"></div>
+<div class="controls">
+    <input type="hidden" class="rVal" value="<#=status["red"]#>"/>
+    <input type="hidden" class="gVal" value="<#=status["green"]#>"/>
+    <input type="hidden" class="bVal" value="<#=status["blue"]#>"/>
+</div>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-refresh am-btn-success">REFRESH</button>
+<button class="am-btn am-btn-default am-btn-xs am-radius btn-set am-btn-primary">SET</button>
+<div class="clf"></div>
+</script>

@@ -1,0 +1,97 @@
+#include "../../pando/pando_object.h"
+#include "c_types.h"
+#include "user_interface.h"
+#include "<#=label#>.h"
+// add your own includes below
+<# var id2type=[
+   "",
+   "float64",
+   "float32",
+   "int8",
+   "int16",
+   "int32",
+   "int64",
+   "uint8",
+   "uint16",
+   "uint32",
+	"uint64",
+	"char*",
+	"char*",
+	"bool"
+];#>
+
+struct <#=label#> {<# for(var i=0; i < status.length; i++) { #>
+	<#= id2type[status[i].value_type] #> <#= status[i].name #>;<# } #>
+};
+void ICACHE_FLASH_ATTR
+<#=label #>_init() {
+	// TODO: add your object init code here.
+
+
+}
+void ICACHE_FLASH_ATTR
+<#=label #>_set(struct <#=label #>* value) {
+	// TODO: implement object set function here.
+	// the set function read value and operate the hardware.
+
+
+}
+void ICACHE_FLASH_ATTR
+<#=label #>_get(struct <#=label #>* value) {
+	// TODO: implement object get  function here
+	// get function retrieve hardware status and assign it to value.
+
+
+}
+/*
+	auto generated code below!!
+	DO NOT edit unless you know how it works.
+*/
+struct <#=label #>* ICACHE_FLASH_ATTR
+create_<#=label #>() {
+	struct <#=label #>* <#=label #> = (struct <#=label #>*)os_malloc(sizeof(<#=label #>));
+	return <#=label #>;
+}
+void ICACHE_FLASH_ATTR
+delete_<#=label #>(struct <#=label #>* <#=label #>) {
+	if(<#=label #>){
+		os_free(<#=label #>);
+	}
+}
+void ICACHE_FLASH_ATTR
+<#=label #>_object_pack(PARAMS * params) {
+	if(NULL == params){
+		PRINTF("Create first tlv param failed.\n");
+		return;
+	}
+	
+	struct <#=label #>* <#=label #> = create_<#=label #>();
+	<#=label #>_get(<#=label #>);
+	<# for(var i=0; i < status.length; i++) { #>
+	if (add_next_<#=id2type[status[i].value_type]#>(params, <#=label#>-><#=status[i].name#>)){
+		PRINTF("Add next param failed.\n");
+		return;
+	}
+	<# } #>
+	delete_<#=label #>(<#=label #>);
+}
+void ICACHE_FLASH_ATTR
+<#=label #>_object_unpack(PARAMS* params) {
+	struct <#=label #>* <#=label #> = create_<#=label #>();
+	<# for(var i=0; i < status.length; i++) { #>
+	<#=label#>-><#=status[i].name#> = get_next_<#=id2type[status[i].value_type]#>(params);<# } #>
+
+	<#=label #>_set(<#=label #>);
+	delete_<#=label #>(<#=label #>);
+}
+void ICACHE_FLASH_ATTR
+<#=label #>_object_init() {
+	<#=label #>_init();
+	pando_object <#=label #>_object = {
+		<#=no #>,
+		<#=label #>_object_pack,
+		<#=label #>_object_unpack,
+	};
+	register_pando_object(<#=label #>_object);
+}
+

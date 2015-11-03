@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/page/login.css" rel="stylesheet">
+		<link href="/css/page/comment.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container-fluid margintop">
+			<div class="row text-center">
+				<div class="col-md-offset-4 col-md-4">
+					<div class="login-form">
+						<div class="form-group">
+							<input class="form-control" placeholder="账号" name="username" type="text" autofocus maxlength=????                                    </div>
+						<div class="alert alert-warning" style="display:none" id="rc1">只允许大小写字母与数字，长度最短4位<????                                    <div class="form-group">
+								<input id="nPwd1" class="form-control" placeholder="密码" name="password" type="password" maxle????                                    </div>
+							<div class="alert alert-warning" style="display:none" id="rc2">请输入6-20位密码，只允许大小写字母和????                                    <div class="form-group">
+									<input id="nPwd2" class="form-control" placeholder="确认密码" name="rePassword" type="password"????                                    </div>
+								<div class="alert alert-warning" style="display:none" id="rc3">请再输入一次密码</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="真实姓名" name="realname" type="text" maxlength="10" o????                                    </div>
+								<div class="alert alert-warning" style="display:none" id="rc4">请输入您的真实姓名</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="手机号" name="telephone" type="text" maxlength="11" on????                                    </div>
+								<div class="alert alert-warning" style="display:none" id="rc5">请输入11位手机号</div>
+								<div class="form-group">
+									<input class="form-control" placeholder="公司/机构名字" name="company" type="text" maxlength="2????                                    </div>
+						<h1>Tisan</h1>
+						<div class="control-group marginup">
+							<input type="text" class="username form-control form-control-lg" value="" placeholder="Enter your email address" id="login-name">
+							<label class="login-field-icon fui-man-16" for="login-name"></label>
+						</div>
+						<span class="alert alert-warning">帐号名已被注册</span>
+						<div class="control-group">
+							<input type="password" class="password form-control form-control-lg" value="" placeholder="Password" id="login-pass">
+							<label class="login-field-icon fui-lock-16" for="login-pass"></label>
+						</div>
+
+						<div class="control-group">
+							<input type="password" class="repeat-password form-control form-control-lg" value="" placeholder="Repeat password" id="login-pass">
+							<label class="login-field-icon fui-lock-16" for="login-pass"></label>
+						</div>
+
+						<a class="btn btn-info btn-lg btn-block register-btn marginup" href="#">Join Tisan</a>
+						<div class="control-group marginup">
+							<a class="login-link" href="/user/login">已有帐号,去登陆</a>
+						</div>
+					</div>
+				<div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+	</body>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+	<script src="/js/page/register.js"></script>
+</html>

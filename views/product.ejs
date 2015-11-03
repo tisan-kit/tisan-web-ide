@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>工作区</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/page/file_upload.css" rel="stylesheet">
+        <link href="/css/page/common.css" rel="stylesheet">
+        <link href="/css/page/notification.css" rel="stylesheet">
+        <link href="/css/page/iphone.css" rel="stylesheet">
+        <link href="/css/page/product.css" rel="stylesheet">
+		<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+        <script src="/js/arttemplate.js"></script>
+		<script src="/js/qrcode.js"></script>
+		<script src="/js/h5-qrcode.js"></script>
+
+        <script src="http://qtestbucket.qiniudn.com/demo/qiniu.uploader.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="/css/page/highlight.min.css">
+        <script src="/js/highlight.min.js"></script>
+
+            <script src="/js/page/jquery.base.js"></script>
+            <script src="/js/page/jcrop.js"></script>
+            <script src="/js/page/base.js"></script>
+
+        <script>
+            template.config('openTag','<#');
+            template.config('closeTag','#>');
+        </script>
+
+        <script id="template-hardwares" type="text/html">
+			<div class="hardwares">
+				<#if(hardwares.length==0){#>
+				<div class="no-hardwares">您未设置设备信息，前往个人中心设置</div>
+				<#}#>
+				<#for(var i in hardwares){#>
+				<div class="hardware" data-mac="<#=hardwares[i].code#>">
+					<div class="hardware-name"><#=hardwares[i].name#></div>
+					<div class="hardware-mac"><#=hardwares[i].code#></div>
+					<div class="btn-select-hardware">选择</div>
+				</div>
+				<#}#>
+			</div>
+		</script>
+        <script id="template-custom-widget-editor" type="text/html">
+			<div id="custom-widget-editor">
+				<div class="title">编辑</div>
+				<div class="input-wrap">
+					<input id="custom-editor-name" value="" placeholder="组件名称">
+				</div>
+				<div class="widget-statuses">
+					<div class="btn btn-custom-addstatus">增加状态</div>
+				</div>
+				<div class="custom-editor-buttons">
+					<div class="btn btn-custom-add">新增</div>
+					<div class="btn btn-custom-save">保存</div>
+					<div class="btn btn-custom-remove">删除</div>
+				</div>
+			</div>
+		</script>
+		<script id="template-custom-statuses" type="text/html">
+		<#
+		var id2type=[
+		   "",
+		   "float64",
+		   "float32",
+		   "int8",
+		   "int16",
+		   "int32",
+		   "int64",
+		   "uint8",
+		   "uint16",
+		   "uint32",
+			"uint64",
+			"char*",
+			"char*",
+			"bool"
+		];
+		#>
+			<#for(var i in statuses){#>
+			<div class="widget-status horizontal">
+				<div class="input-wrap">
+					<input class="input-status-name" placeholder="状态名称" value="<#=statuses[i].name?statuses[i].name:''#>">
+				</div>
+				<select class="select-status">
+					<#for(var j=1;j<id2type.length;++j){#>
+					<option value="<#=j#>" <#if(j==statuses[i].value_type){#>selected=selected<#}#>><#=id2type[j]#></option>
+					<#}#>
+				</select>
+				<div class="btn-status-remove">x</div>
+			</div>
+			<#}#>
+		</script>
+		<script id="template-custom-addstatus" type="text/html">
+			<div class="btn btn-custom-addstatus">增加状态</div>
+		</script>
+        <script id="template-qrcode" type="text/html">
+			<div id="qrcode"></div>
+		</script>
+        <script id="template-code-h" type="text/html">
+            <pre style="width:100%"><code class="cpp hljs"><%include template/code_h.ejs %>
+        </code></pre>
+        </script>
+        <script id="template-code-c" type="text/html">
+            <pre style="width:100%"><code class="cpp hljs"><%include template/code_c.ejs %>
+        </code></pre>
+        </script>
+        <script id="template-incontent-tabs" type="text/html">
+		<div class="vertical-wrap">
+			<div class="incontent-tabs">
+				<#for(var i =0;i<tabs.length;++i){#>
+				<div class="incontent-tab"><#=tabs[i].title#></div>
+				<#}#>
+			</div>
+			<#for(var i =0;i<tabs.length;++i){#>
+			<div class="incontent-tab-content incontent-tab-index<#=i#>">
+			<#==tabs[i].content#>
+			</div>
+			<#}#>
+		</div>
+        </script>
+        <script id="template-changeAvatar" type="text/html">
+            <div class="user head-portrait-preview" style="display:none">
+                <div class="head-portrait-preview-200"></div>
+            </div>
+            <div id="userface" class="upload"></div>
+        </script>
+        <script id="template-widgets" type="text/html">
+            <#for(var i in objects){#>
+			<#if(objects[i].id==9||objects[i].id==5){continue;}#>
+			<div data-id="<#=objects[i].id#>" class="widget" <#if(objects[i].vanish){#>style="visibility:hidden;"<#}#> label="<#=objects[i].label#>" data-no="<#=objects[i].no#>" data-name="<#=objects[i].name?objects[i].name:''#>">
+                <div class="widget-name"><#=objects[i].name?objects[i].name:objects[i].label#></div>
+                <div class="btn-widget-remove">x</div>
+                <div class="btn-widget-edit">编辑</div>
+				<w class="label-name"><#=objects[i].label#></w>
+            </div>
+            <#}#>
+        </script>
+        <script src="/js/page/common.js"></script>
+    </head>
+    <body>
+        <div class="row">
+			<%include navigation.ejs%>
+		</div>
+        <%include notification.ejs%>
+        <div class="row padding-navigation h100">
+            <div class="col-md-12 ide">
+                <div class="device-panel">
+                    <div class="device-key-title">
+                        产品Key
+                    </div>
+                    <div class="device-key-wrap">
+                        <div class="key">
+                        </div>
+                    </div>
+                    <div class="device-title">
+                        产品信息
+                    </div>
+                    <div>
+                        <div class="device-info-wrap">
+                            <div class="device-avatar-wrap">
+                                <img class="device-avatar" src="/img/default.png">
+                                <div class="device-name-wrap">
+                                    <input class="input-device-name" placeholder="名称" value="">
+                                </div>
+                            </div>
+                            <div class="device-intro-wrap">
+                                <textarea class="input-device-intro" placeholder="介绍"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="device-title">
+                        产品组件
+                    </div>
+                    <div class="flex1 oscroll">
+                        <div class="widgets-panel">
+                            <div class="widget btn-widget-add" data-type="widget-add">
+                                <div>+</div>
+                            </div>
+                            <div class="widget btn-widget-add" data-type="widget-add" style="visibility:hidden">
+                                <div>+</div>
+                            </div>
+                            <div class="widget btn-widget-add" data-type="widget-add" style="visibility:hidden">
+                                <div>+</div>
+                            </div>
+                            <div class="widget btn-widget-add" data-type="widget-add" style="visibility:hidden">
+                                <div>+</div>
+                            </div>
+                            <div class="widget btn-widget-add" data-type="widget-add" style="visibility:hidden">
+                                <div>+</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-remove">删除</button>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-save">保存</button>
+                    </div>
+                </div>
+                <div class="ide-preview">
+                    <div class="iphone">
+                        <div class="screen">
+                            <iframe id="iot-iframe" src="/product/webapp/<%=product.id%>" width="100%" height="100%" style="border:0;"></iframe>
+                        </div>
+						<div class="btn-qrcode">二维码</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function clone(myObj){ 
+            if(typeof(myObj) != 'object') return myObj; 
+            if(myObj == null) return myObj; 
+            return JSON.parse(JSON.stringify(myObj));
+        } 
+
+        var bodyDom=$('body');
+
+		var id2name={};
+        var basicWidgets={};
+        var customWidgets={};
+        var basicWidgetsMap={};
+        var addedWidgets={objects:[],commands:[],events:[]};
+		var hardwares=[];
+
+		//获取基本组件
+		function getBasicWidgets(callback){
+            $.get('/object/all?is_public=1',function(r){
+                    if(r.code!=0){
+                        notification.show({
+                            title:'错误',
+                            content:r.msg
+                        });
+                        return;
+                    }
+                    basicWidgets.objects=r.data;
+                    for(var i in basicWidgets.objects){
+                        basicWidgetsMap[basicWidgets.objects[i].id+'']=basicWidgets.objects[i];
+						id2name[basicWidgets.objects[i].id+'']=basicWidgets.objects[i].name;
+                    }
+					if(callback){
+						callback();
+					}
+            });
+		}
+
+		//获取自定义组件
+		function getCustomWidgets(callback){
+			$.get('/object/all?is_public=0',function(r){
+            	if(r.code!=0){
+            	    notification.show({
+            	        title:'错误',
+            	        content:r.msg
+            	    });
+            	    return;
+            	}
+				customWidgets.objects=r.data;
+				for(var i in customWidgets.objects){
+					//customWidgets.objects[i].status=customWidgets.objects[i].status!=""?JSON.parse(customWidgets.objects[i].status):[];
+					id2name[customWidgets.objects[i].id+'']=customWidgets.objects[i].name;
+				}
+				if(callback){
+					callback();
+				}
+            });
+		}
+
+		//获取产品信息 已添加组件
+		function getProductInfo(){
+        	$.get('/product/detail/<%=product.id%>',function(r){
+        	        console.log(r);
+        	        $('.key').append(r.product.key);
+        	        $('.key').attr('data-key',r.product.key);
+        	        if(r.product.avatar){
+        	            $('.device-avatar').attr('src',r.product.avatar);
+        	        }
+        	        $('.device-panel .input-device-name').val(r.product.name);
+        	        $('.device-panel .input-device-intro').text(r.product.descript);
+        	        productStatus.name=r.product.name;
+        	        productStatus.descript=r.product.descript;
+					addedWidgets.objects=r.inobjects.objects?r.inobjects.objects:[];
+					var showObjects=clone(addedWidgets.objects);
+					for(var i in showObjects){
+						showObjects[i].name=id2name[showObjects[i].id+''];
+					}
+        	        $('.device-panel .widgets-panel').prepend(template('template-widgets',{objects:showObjects}));
+        	});
+		}
+        function init(){
+			//获取所有设备
+			$.get('/user/hardware/list',function(r){
+					if(r.code!=0){
+                        notification.show({
+                            title:'错误',
+                            content:r.msg
+                        });
+                        return;
+					}
+					hardwares=r.data;
+			});
+
+			getBasicWidgets(getProductInfo);
+			getCustomWidgets();
+        }
+        init();
+
+        $('.device-key-wrap').on('click',function(){
+                notification.show({
+                    title:'产品Key',
+                    content:$('.key').attr('data-key'),
+                    size:'flat'
+                });
+        });
+        var ghostWidgets={
+            objects:[{vanish:true},{vanish:true},{vanish:true},{vanish:true}]
+        }
+        function renderWidgets(){
+            $('.device-panel .widget[data-type!="widget-add"]').remove();
+			var showObjects=clone(addedWidgets.objects);
+			for(var i in showObjects){
+				showObjects[i].name=id2name[showObjects[i].id+''];
+			}
+            $('.device-panel .widgets-panel').prepend(template('template-widgets',{objects:showObjects}));
+        }
+
+        $('.device-panel .btn-widget-add').on('click',function(){
+				var showBasicObjects=clone(basicWidgets.objects);
+				for(var i in showBasicObjects){
+					showBasicObjects[i].name=id2name[showBasicObjects[i].id+''];
+				}
+				var showCustomObjects=clone(customWidgets.objects);
+				for(var i in showCustomObjects){
+					showCustomObjects[i].name=id2name[showCustomObjects[i].id+''];
+				}
+                notification.show({
+                    mode:'tabs',
+                    size:'m',
+					tabs:[{
+							title:'公共组件库',
+                    		content:'<div class="widgets-panel public-widgets">'+
+										template('template-widgets',{objects:showBasicObjects})+
+										template('template-widgets',{objects:ghostWidgets.objects})+
+									'</div>'
+						},{
+							title:'自定义组件',
+							content:
+							'<div class="widgets-panel custom-widgets">'+template('template-widgets',{objects:showCustomObjects})+
+                            	'<div class="widget btn-widget-add" data-type="widget-add">'+
+                            	    '<div>+</div>'+
+                            	'</div>'+
+								template('template-widgets',{objects:ghostWidgets.objects})+
+							'</div>'+template('template-custom-widget-editor',{})
+					}],
+                    btnYesCallback:function(){
+                        if(!curWidgetId){
+                            //notification.hide();
+							console.log('no selected widget');
+                            return;
+                        }
+						var widget;
+						if($('.widget[data-id='+curWidgetId+']').closest('.custom-widgets').length){
+							for(var i in customWidgets.objects){
+								if(customWidgets.objects[i].id==curWidgetId){
+									widget=customWidgets.objects[i];
+									widget.no=$('.device-panel .widgets[data-type!="widget-add"]').length+1;
+									break;
+								}
+							}
+						}else{
+							var widget=basicWidgetsMap[curWidgetId];
+						}
+
+                        addedWidgets.objects.push(clone(widget));
+                        makeOrder();
+                        renderWidgets();
+                        //saveStatus(function(){
+                            curWidgetId=undefined;
+                            notification.hide();
+                        //});
+                    }
+                });
+
+                $('.notification .public-widgets .widget').eq(0).click();
+				$('.notification-tab').on('click',function(){
+						$('.notification-tab-content').each(function(){
+							if($(this).css('display')!='none'){
+								$(this).find('.widget').eq(0).click();
+							}
+						});
+				});
+        });
+        
+        function makeOrder(){
+            for(var i in addedWidgets.objects){
+                addedWidgets.objects[i].no=parseInt(i)+1;
+            }
+        }
+
+		bodyDom.delegate('.btn-custom-addstatus','click',function(){
+				var parent=$(this).parent();
+				$(this).remove();
+				//Default
+				var data={
+					statuses:[
+						{
+							name:'',
+							value:'1'
+						}
+					]
+				}
+				parent.append(template('template-custom-statuses',data));
+				parent.append(template('template-custom-addstatus',{}));
+		});
+        var curWidgetId;
+        var curRemoveWidgetID;
+        var curRemoveWidgetNO;
+		bodyDom.delegate('.notification .btn-status-remove','click',function(){
+				$(this).closest('.widget-status').remove();
+		});
+        bodyDom.delegate('.device-panel .btn-widget-remove','click',function(){
+                curRemoveWidgetID=$(this).closest('.widget').attr('data-id');
+                curRemoveWidgetNO=$(this).closest('.widget').attr('data-no');
+                notification.show({
+                    title:'提示',
+                    content:'确定要删除吗？',
+                    size:'xm',
+                    btnYesCallback:function(){
+                        var found=false;
+                        for(var i =0;i<addedWidgets.objects.length;++i){
+                            if(addedWidgets.objects[i].no==curRemoveWidgetNO&&addedWidgets.objects[i].id==curRemoveWidgetID){
+                                found=true;
+                                addedWidgets.objects.splice(i,1);
+                                break;
+                            }
+                        }
+                        if(!found){console.log("删除失败");return;}
+                        makeOrder();
+                        renderWidgets();
+
+                        saveStatus(function(){
+                            notification.hide();
+                        });
+                    }
+                });
+        });
+        $('.device-avatar').on('click',function(){
+                notification.show({
+                    title:'修改头像',
+                    size:'m',
+                    content:template('template-changeAvatar',{}),
+                    btnYesCallback:function(){
+                        $('.head-portrait-button-save').click();
+                    }
+                });
+            $('#userface').portrait({
+                limit: 1024 * 1024 * 1,
+                canvas: { width: 360, height: 270, result: 300 },
+                lang: {
+                    reupload: 'Re upload',
+                    save: '确定',
+                    cancel: '取消',
+                    failure: 'update failure',
+                    success: 'update success',
+                    filetype: 'please select picture file',
+                    limit: 'file size must less than 2M',
+                    leftitle: 'Adjust avatar',
+                    leftip: 'Drag the box to adjust the position and dimensions.',
+                    rightitle: 'Preview',
+                    rightip: 'Avatar preview',
+                    title: 'Show your best avatar',
+                    del: 'delete',
+                    none: 'Please upload a picture',
+                    min: 'Avatar size min-width 30px'
+                },
+                fun: function (file) {
+                    $('.avant-img').attr('src',file);
+                    $.get('/qiniu/product/avatar/token?productid=<%=product.id%>',function(res){
+                        var token = res.token;
+                        var buff = file.replace(/^data:image\/jpeg;base64,/,'');
+                        putb64(token,buff);
+                    });
+                    $('.user-face').html('<img src="{0}" style="width:300px;height:300px" />'.format(file));
+                    $('.device-avatar').attr('src',''+file+'');
+                },
+                cancel: function () {
+                }
+            });
+            var archive=0;
+    
+            function putb64(token,file){
+                if(archive){ return; }
+                var url = "http://up.qiniu.com/putb64/-1";
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4){
+                        notification.hide();
+                        console.log(xhr.responseText);
+                    }
+                }
+                xhr.open("POST", url, true); 
+                xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
+                xhr.setRequestHeader("Authorization", "UpToken "+token); 
+                xhr.send(file);
+            } 
+        });
+        bodyDom.delegate('.switch-change-label input','click',function(e){
+				e.stopPropagation();
+		});
+        bodyDom.delegate('.switch-change-label','click',function(){
+				if($(this).hasClass('on')){
+					$(this).removeClass('on');
+				}else{
+					$(this).addClass('on');
+				}
+		});
+        bodyDom.delegate('.btn-change-label','click',function(){
+				var label=$('.input-change-label').val();
+				function ifLabelLegal(str){
+					for(var i in addedWidgets.objects){
+						if(addedWidgets.objects[i].label==str){
+							return false;
+						}
+					}
+					if(str=='switch'||str=='int'){
+						return false;
+					}
+					return true;
+				}
+				if(ifLabelLegal(label)){
+					$('.btn-notification-no').click();
+					var id=$('.switch-change-label').attr('data-id');
+					var no=$('.switch-change-label').attr('data-no');
+					for(var i in addedWidgets.objects){
+						if(addedWidgets.objects[i].id==id&&addedWidgets.objects[i].no==no){
+							addedWidgets.objects[i].label=label;
+						}
+					}
+					$('.device-panel .widget[data-id='+id+'][data-no='+no+'] .label-name').text(label);
+					setTimeout(function(){
+						$('.device-panel .widget[data-id='+id+'][data-no='+no+'] .btn-widget-edit').click();
+					},400);
+				}else{
+					alert('Label名称不合法,必须在产品中唯一,并且不能为C语言中的关键字');
+				}
+		});
+		function getCustomWidget(dom){
+				var status=[];
+				$('.select-status').each(function(){
+					var parent=$(this).closest('.widget-status');
+					var name=parent.find('.input-status-name').val();
+					var type=$(this).val();
+					if(name.length>0){
+						status.push({
+							name:name,
+							value_type:type
+						});
+					}
+				});
+				var name=$('#custom-editor-name').val();
+
+				var label='labelname';
+				var id=$('#custom-widget-editor').attr('data-id');
+				var object={
+					name:name,
+					c_code:'',
+					label:label,
+					part:1,
+					status:status
+				};
+				if(id){
+					var target=$('.custom-widgets .widget[data-id='+id+']');
+					object.label=target.attr('label');
+					object.id=id;
+				}
+				//{name:req.body.name,c_code:req.body.c_code,status:req.body.status,label:req.body.label} 
+				return object;
+		}
+		bodyDom.delegate('.notification .btn-custom-save','click',function(){
+				var object=getCustomWidget();
+				//	/object/:id PUT {name:req.body.name,c_code:req.body.c_code,status:req.body.status,label:req.body.label} 更新自定义组件
+				var status=clone(object.status);
+				object.status=JSON.stringify(object.status);
+				$.ajax({
+					type:'put',
+					url:'/object/'+object.id,
+					data:object,
+					async:false,
+					success:function(r){
+						if(r.code!=0){
+							alert(r.msg);
+							return;
+						}
+						object.status=status;
+						var index=0;
+						for(var i in customWidgets.objects){
+							if(customWidgets.objects[i].id==object.id){
+								customWidgets.objects[i]=object;
+								index=i;
+								break;
+							}
+						}
+						reloadCustomWidgets();
+						$('.custom-widgets .widget').eq(index).click();
+					}
+				});
+		});
+		function reloadCustomWidgets(){
+				var showObjects=clone(customWidgets.objects);
+				for(var i in showObjects){
+					showObjects[i].name=id2name[showObjects[i].id+''];
+				}
+				$('.custom-widgets').html(template('template-widgets',{objects:showObjects})+
+                            	'<div class="widget btn-widget-add" data-type="widget-add">'+
+                            	    '<div>+</div>'+
+                            	'</div>'+
+								template('template-widgets',{objects:ghostWidgets.objects}));
+		}
+		bodyDom.delegate('.notification .btn-custom-add','click',function(){
+				var object=getCustomWidget();
+				if(object.status.length==0){
+					alert("状态不能未空");
+					return;
+				}
+				var status=clone(object.status);
+				object.status=JSON.stringify(object.status);
+				$.post('/object',object,function(r){
+					if(r.code!=0){
+						alert(r.msg);
+						return;
+					}
+					object.status=status;
+					object.id=r.data;
+					customWidgets.objects.push(object);
+					reloadCustomWidgets();
+				});
+		});
+        bodyDom.delegate('.notification .widget','click',function(){
+				var self=$(this);
+                curWidgetId=self.attr('data-id');
+                $('.notification .widget').removeClass('selected');
+                self.addClass('selected');
+
+				///点击自定义组件中的组件
+				if(self.closest('.custom-widgets').length){
+					function sw(){
+							$('.btn-custom-add').hide();
+							$('.btn-custom-remove').hide();
+							$('.btn-custom-save').hide();
+							if(self.hasClass('btn-widget-add')){
+								$('#custom-widget-editor .title').text('新增自定义组件');
+								$('.btn-custom-add').show();
+							}else{
+								$('#custom-widget-editor .title').text('编辑自定义组件');
+								$('.btn-custom-save').show();
+								$('.btn-custom-remove').show();
+							}
+							$('#custom-widget-editor').addClass('show');
+
+							var widget_id=self.attr('data-id');
+							var info={};
+							for(var i in customWidgets.objects){
+								if(customWidgets.objects[i].id==widget_id){
+									info=customWidgets.objects[i];
+								}
+							}
+							var id=self.attr('data-id')?self.attr('data-id'):'';
+							$('#custom-widget-editor').attr('data-id',id);
+							$('#custom-editor-name').val(info.name);
+							var data={
+								statuses:info.status
+							}
+							$('.widget-statuses').html(template('template-custom-statuses',data))
+							$('.widget-statuses').append(template('template-custom-addstatus',{}));
+					}
+					if($('#custom-widget-editor').hasClass('show')){
+						$('#custom-widget-editor').removeClass('show');
+						setTimeout(sw,300);
+					}else{
+						sw();
+					}
+				}
+
+        });
+		bodyDom.delegate('.btn-custom-remove','click',function(){
+				var id=$('#custom-widget-editor').attr('data-id');
+				$.ajax({
+					url:'/object/'+id,
+					type:'DELETE',
+					success:function(r){
+						if(r.code!=0){
+							alert(r.msg);
+							return;
+						}
+						for(var i in customWidgets.objects){
+							if(customWidgets.objects[i].id==id){
+								customWidgets.objects.splice(i,1);
+								break;
+							}
+						}
+						reloadCustomWidgets();
+						$('.custom-widgets .widget').eq(0).click();
+					}
+				});
+		});
+        bodyDom.delegate('.btn-widget-edit','click',function(){
+				var data;
+				var id=$(this).closest('.widget').attr('data-id');
+				var no=$(this).closest('.widget').attr('data-no');
+				var label;
+                for(var i =0;i<addedWidgets.objects.length;++i){
+                    if(addedWidgets.objects[i].no==no&&addedWidgets.objects[i].id==id){
+						data=addedWidgets.objects[i];
+						label=addedWidgets.objects[i].label;
+                        break;
+                    }
+                }
+                if(!data){console.log("失败");return;}
+
+				var code_c=template('template-code-c',data);
+				var code_h=template('template-code-h',data);
+                notification.show({
+                    size:'l',
+					content:template('template-incontent-tabs',
+						{
+							tabs:[
+							{title:label+'.c',content:code_c},
+							{title:label+'.h',content:code_h}
+							]
+						})+
+						'<div class="switch-change-label" data-id="'+id+'" data-no="'+no+'">修改Label'+
+							'<div class="change-label-wrap">'+
+								'<div class="input-wrap">'+
+									'<input class="input-change-label" value="'+label+'">'+
+								'</div>'+
+								'<button class="btn btn-change-label">修改</button>'+
+							'</div>'+
+						'</div>',
+                    title:'代码预览'
+                });
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+				$('.incontent-tab').eq(0).click();
+        });
+
+        var productStatus={
+            name:'',
+            descript:'',
+            product_id:'<%=product.id%>'
+        };
+        $('.input-device-intro').on('change',function(){
+                productStatus.descript=$(this).val();
+        });
+        $('.input-device-name').on('change',function(){
+                productStatus.name=$(this).val();
+        });
+        function saveStatus(callback){
+            var status={};
+            status.objects=clone(addedWidgets);
+            for(var i in status.objects.objects){
+                status.objects.objects[i].part=1;
+                delete(status.objects.objects[i].c_code);
+                delete(status.objects.objects[i].name);
+            }
+			var statistics={};
+			for(var i in status.objects.objects){
+				if(!status.objects.objects[i].label){
+                     notification.show({
+                         size:'xm',
+                         title:'保存失败',
+                         content:'请保证每个Widget的label不为空'
+                     });
+                     return;
+				}
+				if(statistics[status.objects.objects[i].label]>0){
+                     notification.show({
+                         size:'xm',
+                         title:'保存失败',
+                         content:'请保证每个Widget的label唯一'
+                     });
+                     return;
+				}else{
+					statistics[status.objects.objects[i].label]=1;
+				}
+			}
+            status.objects=JSON.stringify(status.objects);
+            $.ajax({
+                    url:'/product/save/config/<%=product.id%>',
+                    type:'POST',
+                    data:status,
+                    success:function(res){
+                        if(res.code!=0){
+                            notification.show({
+                                size:'xm',
+                                title:'发生错误',
+                                content:res.msg
+                            });
+                            return;
+                        }
+                        if(callback){
+                            callback();
+                        }
+                        $('#iot-iframe')[0].src=$('#iot-iframe')[0].src;
+                    }
+            });
+        }
+        $('.btn-remove').on('click',function(){
+                notification.show({
+                    title:'警告',
+                    content:'确定要删除整个产品吗？',
+                    size:'xm',
+                    btnYesCallback:function(){
+                        $.ajax({url:'/product/<%=product.id%>',type:'delete',success:function(r){
+                            if(r.code!=0){
+                                notification.show({
+                                    size:'xm',
+                                    title:'发生错误',
+                                    content:r.msg
+                                });
+                                return;
+                            }
+                            location.href='/workspace';
+                        }});
+                    }
+                });
+        });
+        $('.btn-save').on('click',function(){
+                saveStatus(function(){
+                    $.post('/product/save/base/<%=product.id%>',productStatus,function(r){
+                        if(r.code!=0){
+                            notification.show({
+                                size:'xm',
+                                title:'发生错误',
+                                content:r.msg
+                            });
+                            return;
+                        }
+                        notification.show({
+                            title:'通知',
+                            content:'保存成功',
+                            size:'xm'
+                        });
+                    });
+                });
+        });
+		bodyDom.delegate('.btn-select-hardware','click',function(){
+				var code=$(this).closest('.hardware').attr('data-mac').replace(/-/g,'');
+				var product_id=<%=product.id%>;
+				product_id=product_id.toString(16);
+				var url='pando://identifier?identifier=0-'+product_id+'-'+code;
+				url=url.toLocaleLowerCase();
+				console.log(url);
+				notification.hide();
+				setTimeout(function(){
+                	notification.show({
+                	    title:'查看二维码',
+						content:template('template-qrcode',{}),
+                	    size:'m-cube'
+                	});
+					$('#qrcode').html(showQRCode(url));
+				},400);
+		});
+        $('.btn-qrcode').on('click',function(){
+				notification.show({
+                    title:'选择设备',
+					content:template('template-hardwares',{hardwares:hardwares}),
+                    size:'m-cube'
+				});
+        });
+    </script>
+</html>

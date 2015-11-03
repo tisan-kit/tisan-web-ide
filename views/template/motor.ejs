@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/iotboard/widgets/motor/motor.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/motor/motor.widget.min.js"></script>
+<script type="text/html" id="template-motor">
+<div class="motor">
+	<#if(title){#>
+    <div class="title"><#=title#></div>
+	<#}#>
+<div class="range-wrap">
+<label for="range">
+      <input type="range" name="range" id="range" min="-128" max="127" step="1" value="<#=status.speed#>" class="motor-range"/>
+</label>
+</div>
+<span class="am-badge am-badge-success am-radius am-text-lg motor-speed"><#=status.speed#></span>
+</div>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-reset am-btn-success">RESET</button>
+<div class="clf"></div>
+</script>

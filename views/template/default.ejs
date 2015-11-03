@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/iotboard/widgets/default/default.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/default/default.widget.min.js"></script>
+<script type="text/html" id="template-default">
+	<#if(label){#>
+		<div class="title">自定义组件<#=label#></div>
+	<#}#>
+	<#for(var i in status){#>
+	<div class="default-status-wrap">
+		<div class="default-status-name"><#=status[i].name#></div>
+		<div class="default-status-input-wrap">
+			<input class="default-status-input" placeholder="空" value="<#=status[i].value#>">
+		</div>
+	</div>
+	<#}#>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-refresh am-btn-success">REFRESH</button>
+<button class="am-btn am-btn-default am-btn-xs am-radius btn-set am-btn-primary">SET</button>
+<div class="clf"></div>
+</script>

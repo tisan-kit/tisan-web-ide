@@ -1,0 +1,36 @@
+syntax = "proto3";  
+package pb;
+message CommonResult {
+  int32   code = 1;
+  string  msg  = 2;
+}
+
+message IdList {
+  repeated int32 list = 1;
+}
+
+message Product {
+  int32 id = 1;
+  int32 vendor_id = 2;
+  string name = 3;
+  string code = 4;
+  string description = 5;
+  string key = 6;
+  bool verified = 7;
+  string icon = 8;
+  string webapp = 9;
+  int32 secure_level = 10;
+  string config = 11;
+}
+
+message ProductList {
+  repeated Product products = 1;
+}
+
+service ProductCMDS {
+  rpc CreateProduct(Product) returns (Product);
+  rpc DeleteProduct(IdList) returns (CommonResult);
+  rpc UpdateProduct(Product) returns (CommonResult);
+  rpc ReadProduct(IdList) returns (ProductList);
+}
+

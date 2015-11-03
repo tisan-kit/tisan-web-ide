@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/page/file_upload.css" rel="stylesheet">
+        <link href="/css/page/common.css" rel="stylesheet">
+        <link href="/css/page/account.css" rel="stylesheet">
+        <link href="/css/page/notification.css" rel="stylesheet">
+        <script src="/js/page/common.js"></script>
+    </head>
+        <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+        <script src="/js/arttemplate.js"></script>
+        <script>
+            template.config('openTag','<#');
+            template.config('closeTag','#>');
+        </script>
+        <script id="template-changeAvatar" type="text/html">
+            <div class="user head-portrait-preview" style="display:none">
+                <div class="head-portrait-preview-200"></div>
+            </div>
+            <div id="userface" class="upload"></div>
+        </script>
+    </head>
+    <body>
+    <%include notification.ejs%>
+        <div class="container-fluid">
+            <%include navigation.ejs%>
+            <div class="row margin-navigation">
+                <div class="col-md-2 col-md-offset-1">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                        <li role="presentation" class="active"><a href="/user/account">帐号</a></li> 
+                        <li role="presentation" style="display:none"><a href="#">密码</a></li>
+                        <li role="presentation" style="display:none"><a href="#">消息</a></li>
+                        <li role="presentation"><a href="/user/hardware">开发板设置</a></li>
+                        <li role="presentation"><a href="/user/opinion">我要提意见</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-7 col-md-offset-1">
+                    <ul class="nav" style="text-align:left;!important">
+                        <li class="avant-img-box">
+                            <div class="row">
+                                <div class="col-md-4">
+                                        <img class="avant-img avatar" style="width:150px" src="<%if(user.avatar!=null){%><%=user.avatar%><%}else{%>/img/default-avant.png<%}%>"/>
+                                        <span class="avant-img-title">修改</span>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="">
+                            <div class="bs-esxample" style="-webkit-box-shadow:0px;!important;box-shadow:0;!important;border-width:0px;!important;" data-example-id="basic-forms">
+                                <div class="row"> 
+                                     <div class="col-md-5">
+                                         <div class="form-group" style="margin-bottom:0px; margin-top:20px;max-width:250px;">
+                                             <div class="name-box input-group">
+                                                 <span class="input-group-addon">
+                                                     <span class="glyphicon glyphicon-user"></span>
+                                                 </span>
+                                                 <input maxlength=30 class="name-input form-control" value="<%if(user.realname!=null){%><%=user.realname%><%}%>" placeholder="姓名">
+                                                 <span class="name-nav glyphicon form-control-feedback" aria-hidden="true">
+                                             </div>
+                                         </div>
+                                        <span class="remarks-title">* 支持中文英文数字组合,不支持特殊字符</span>
+                                     </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="col-md-5">
+                                        <div class="form-group" style="margin-bottom:0px; margin-top:20px;max-width:250px;">
+                                            <div class="email-box input-group">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-envelope"></span>
+                                                </span>
+                                                <input maxlength=50 readonly="readonly" class="email-input form-control" value="<%if(user.username!=null){%><%=user.username%><%}%>" placeholder="邮箱">
+                                                <span class="email-nav glyphicon form-control-feedback" aria-hidden="true">
+                                            </div>
+                                        </div>
+                                        <span class="remarks-title">* 不支持特殊字符,正确输入:robot@tisan.com</span>
+                                    </div>
+                                </div>
+                                <div class="row"> 
+                                    <div class="col-md-5">
+                                        <div class="form-group" style="margin-bottom:0px; margin-top:20px;max-width:250px;">
+                                            <div class="phone-box input-group">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-phone"></span>
+                                                </span>
+                                                <input class="phone-input form-control" maxlength=11 value="<%if(user.telephone!=null){%><%=user.telephone%><%}%>" placeholder="手机号">
+                                                <span class="phone-nav glyphicon form-control-feedback" aria-hidden="true">
+                                            </div>
+                                        </div>
+                                        <span class="remarks-title">* 只支持中国大陆的11位手机号码</span>
+                                    </div>
+                                </div>
+                                <button style="margin-top:20px;width:250px" class="btn btn-primary btn-save-base">保存</button>
+                             </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-1">
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/page/account.js"></script>
+    <script src="/js/page/jquery.base.js"></script>
+    <script src="/js/page/jcrop.js"></script>
+    <script src="/js/page/base.js"></script>
+    <script src="http://qtestbucket.qiniudn.com/demo/qiniu.uploader.js"></script>
+
+    <script type="text/javascript">
+
+		var showUpload=function(){
+                notification.show({
+                    title:'修改头像',
+                    size:'m',
+                    content:template('template-changeAvatar',{}),
+                    btnYesCallback:function(){
+                        $('.head-portrait-button-save').click();
+                    }
+                });
+                $('#userface').portrait({
+                    limit: 1024 * 1024 * 1,
+                    canvas: { width: 360, height: 270, result: 300 },
+                    lang: {
+                        reupload: 'Re upload',
+                        save: '确定',
+                        cancel: '取消',
+                        failure: 'update failure',
+                        success: 'update success',
+                        filetype: 'please select picture file',
+                        limit: 'file size must less than 2M',
+                        leftitle: 'Adjust avatar',
+                        leftip: 'Drag the box to adjust the position and dimensions.',
+                        rightitle: 'Preview',
+                        rightip: 'Avatar preview',
+                        title: 'Show your best avatar',
+                        del: 'delete',
+                        none: 'Please upload a picture',
+                        min: 'Avatar size min-width 30px'
+                    },
+                    fun: function (file) {
+                        $('.avant-img').attr('src',file);
+                        $('.nav-avant').attr('src',file);
+                        $.get('/qiniu/account/avatar/token',function(res){
+                            var token = res.token;
+                            var buff = file.replace(/^data:image\/jpeg;base64,/,'');
+                            putb64(token,buff,i);
+                        });
+                        $('.user-face').html('<img src="{0}" style="width:300px;height:300px" />'.format(file));
+                        $('.avant-img').attr('src',''+file+'');
+                    },
+                    cancel: function () {
+                    }
+                });
+                var archive=0;
+    
+                function putb64(token,file){
+                    if(archive){ return; }
+                    var url = "http://up.qiniu.com/putb64/-1";
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange=function(){
+                        if(xhr.readyState==4){
+                            notification.hide();
+                            window.history.go(0);
+                            console.log(xhr.responseText);
+                        }
+                    }
+                    xhr.open("POST", url, true); 
+                    xhr.setRequestHeader("Content-Type", "application/octet-stream"); 
+                    xhr.setRequestHeader("Authorization", "UpToken "+token); 
+                    xhr.send(file);
+                } 
+        };
+		$('.avant-img-title').on('click',showUpload);
+        $('.avatar').on('click',showUpload);
+    </script>
+</html>

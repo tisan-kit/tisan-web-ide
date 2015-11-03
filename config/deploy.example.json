@@ -1,0 +1,40 @@
+{
+  "msg":"这是线上配置",
+  "host":"http://localhost", 
+  "listenPort" :8000, 
+  "redis":{
+    "host":"localhost",
+    "port":9000
+  },
+  "mysql" : {
+    "connectionLimit" : 10,
+    "host" : "localhost",
+    "user" : "",
+    "password" : "",
+    "database" : "",
+    "port": "3306"
+  },
+  "qiniu":{
+    "name":"",
+    "host":"",
+    "accountAvatarCallback":"", 
+    "productAvatarCallback":""
+  },
+  "mailconfig":[{
+    "host":"",
+    "port":25,
+    "auth":{
+      "user":"",
+      "pass":""
+    }
+  }],
+  "mailoptions":{
+    "from":"<tisan@pandocloud.com",
+    "subject":"Tisan帐号验证",
+    "to":""
+  },
+  "iframe":"http://localhost/product/webapp/",
+  "grpc":["localhost:20311"],
+  "docUrl":"http://localhost/docoment/iframe",
+  "include":["./localhost.json"]
+}

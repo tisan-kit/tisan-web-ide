@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/iotboard/widgets/text/text.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/text/text.widget.min.js"></script>
+<script type="text/html" id="template-text">
+<#if(title){#>
+<div class="title"><#=title#></div>
+<#}#>
+<div class="text"><#=status.text#></div>
+  </script>
+  <script type="text/html" id="template-atmosphere">
+<#if(title){#>
+<div class="title"><#=title#></div>
+<#}#>
+<div class="temperature">
+    <span class="temperature-val"><#=status.temperature#></span> буC
+</div>
+<div class="humidity">
+    <span class="humidity-icon"></span>
+    <span class="humidity-val"><#=status.humidity#></span>%
+</div>
+<div class="pm25">
+    <span class="pm25-icon"></span>    <span class="pm25-val"><#=status.pm25#></span>
+</div>
+</script>
+
+

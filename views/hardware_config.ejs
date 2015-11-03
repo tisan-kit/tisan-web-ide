@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/page/file_upload.css" rel="stylesheet">
+        <link href="/css/page/common.css" rel="stylesheet">
+        <script src="/js/page/common.js"></script>
+		<style>
+			.new-device,.device{
+				display:-webkit-box;
+				-webkit-box-orient:horizontal;
+				-webkit-box-align:center;
+				width:300px;
+				margin:5px;
+				background:#eee;
+				border:5px;
+				padding:10px;
+			}
+			.device-mac{
+				width:120px;
+				margin-right:10px;
+			}
+			.device-name{
+				width:80px;
+				margin-right:10px;
+			}
+			.text{
+				width:100px;
+			}
+			.input-device-name{
+				width:100%;
+			}
+			.input-device-mac{
+				width:100%;
+			}
+		</style>
+    </head>
+    <body data=<%=error%>>
+        <div class="container-fluid">
+            <%include navigation.ejs%>
+            <div class="row margin-navigation">
+                <div class="col-md-2 col-md-offset-1">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+                        <li role="presentation"><a href="/user/account">帐号</a></li> 
+                        <li role="presentation" style="display:none"><a href="#">密码</a></li>
+                        <li role="presentation" style="display:none"><a href="#">消息</a></li>
+                        <li role="presentation" class="active"><a href="/user/hardware">开发板设置</a></li>
+                        <li role="presentation"><a href="/user/opinion">我要提意见</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-7 col-md-offset-1">
+                    <div class="form-group" style="margin-bottom:0px; margin-top:20px;max-width:250px;">
+                    </div>
+                    <div class="col-md-1">
+						<div class="devices-wrap"></div>
+						<div class="text">新增设备</div>
+						<div class="new-device">
+							<div class="input-wrap" style="width:80px;margin-right:10px;">
+								<input class="input-device-name" placeholder="设备名称">
+							</div>
+							<div class="input-wrap" style="-webkit-box-flex:1;">
+								<input class="input-device-mac" placeholder="MAC地址">
+							</div>
+							<button class="btn btn-primary btn-add">新增</button>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+	<script id="template-devices" type="text/html">
+	<#for(var i in devices){#>
+	<div class="device" data-id="<#=devices[i].id#>">
+		<div class="device-name"><#=devices[i].name#></div>
+		<div class="device-mac"><#=devices[i].code#></div>
+		<button class="btn btn-danger btn-remove">删除</div>
+	</div>
+	<#}#>
+	</script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+	<script src="/js/arttemplate.js"></script>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+        (function(){
+		 template.config('openTag','<#');
+		 template.config('closeTag','#>');
+		 $.get('/user/hardware/list',function(r){
+			 if(r.code!=0){
+			 	alert(r.msg);
+			 	return;
+			 }
+			 $('.devices-wrap').html(template('template-devices',{devices:r.data}));
+		 });
+		 $('body').delegate('.btn-remove','click',function(){
+			 var id=$(this).closest('.device').attr('data-id');
+			 $.ajax({
+				 type:'delete',
+				 url:'/user/hardware/'+id,
+				 success:function(r){
+					 if(r.code!=0){
+					 	alert(r.msg);
+						return;
+					 }
+					 location.reload();
+				 }
+			});
+		 });
+		 $('.btn-add').on('click',function(){
+			 var data={
+			 	name:$('.input-device-name').val(),
+				code:$('.input-device-mac').val()
+			 }
+			 $.post('/user/hardware/',data,function(r){
+				 if(r.code!=0){
+				 alert(r.msg);
+				 return;
+				 }
+				 location.reload();
+			 });
+
+		 });
+        })()
+    </script>
+</html>

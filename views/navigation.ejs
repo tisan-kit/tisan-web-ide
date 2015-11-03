@@ -1,0 +1,73 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid navbar-wrap">
+		<div class="decorative-wrap">
+			<div class="decorative"></div>
+		</div>
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand logo" href="/"></a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="<%if(navigation=='index'){%>active<%}%>">
+					<a href="/">
+						首页
+						<span class="sr-only">(current)</span>
+					</a>
+				</li>
+				<li class="<%if(navigation=='workspace'){%>active<%}%>"><a href="/workspace">工作区</a></li>
+				<li class="dropdown <%if(navigation=='document'){%>active<%}%>">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						帮助文档
+						<span class="caret"> </span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/document/quick-start">快速开发</a></li>
+						<li><a href="/document/hardware">硬件介绍</a></li>
+						<li><a href="/document/environment">开发环境</a></li>
+						<li><a href="/document/development-guide">开发指南</a></li>
+						<li><a href="/document/demo">实例说明</a></li>
+						<li><a href="/document/wechat-support">微信支持</a></li>
+						<li><a href="/document/faq">常见问题</a></li>
+					</ul>
+				</li>
+				<li class="<%if(navigation=='about'){%>active<%}%>"><a href="/about">关于Tisan</a></li>
+				<li class="<%if(navigation=='contribute'){%>active<%}%>"><a href="/contribute">参与项目</a></li>
+				<li class="<%if(navigation=='commercial'){%>active<%}%>"><a href="/commercial">商用服务</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<a class="navbar-brand nav-avant-box" href="/user/account">
+					<%if(user){%>
+						<img alt="Brand" class="nav-avant" src="<%=user.avatar?user.avatar:'/img/default-avant.png'%>">
+					<%}else{%>
+					<%}%>
+				</a>
+				<%if(!user){%>
+					<li><a href="/user/login">登录</a></li>
+				<%}else{%>
+					<li><a href="/user/account"><%=user.username%></a></li>
+				<%}%>
+				<li class="dropdown">
+					<%if(!user){%>
+						<a href="/user/register">注册</a>
+					<%}else{%>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/user/account">设置</a></li>
+							<li style="display:none"><a href="#">消息</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/user/logout">退出</a></li>
+						</ul>
+					<%}%>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>

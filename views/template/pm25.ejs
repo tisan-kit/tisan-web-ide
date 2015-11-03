@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/iotboard/widgets/pm25/pm25.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/pm25/pm25.widget.min.js"></script>
+<script type="text/html" id="template-pm25">
+	<#if(title){#>
+		<div class="title"><#=title#></div>
+	<#}#>
+</div>
+<div class="preview">
+    <div class="progress-circle-container">
+        <div class="progress-circle-outer animate">
+        </div>
+        <div class="progress-circle-inner">
+            <span class="number pm25"><#=status.pm25#></span>
+            <span class="unit">ug/m3</span>
+        </div>
+    </div>
+</div>
+<div class="clf"></div>
+</script>

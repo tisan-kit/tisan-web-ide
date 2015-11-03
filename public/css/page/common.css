@@ -1,0 +1,138 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: '微软雅黑',"Helvetica Neue",Helvetica,Arial,sans-serif;
+  vertical-align: baseline;
+}
+.padding-navigation{
+  padding-top:50px;
+}
+.h100{
+  height:100%;
+}
+.navbar-wrap{
+  background:#286090;
+  position:relative;
+}
+.navbar-wrap .decorative-wrap{
+  overflow:hidden;
+  height:100%;
+  width:100%;
+  position:absolute;
+  top:0;left:0;
+}
+.navbar-wrap .decorative,.container-fluid .decorative:before,.container-fluid .decorative:after{
+  width:100%;
+  padding-top:100%;
+  content:'';
+  background:rgba(0,0,0,0.1);
+  border-radius:50%;
+  position:absolute;
+  top:0;left:0;
+}
+.navbar-default .navbar-nav>li>a {
+  color:#fff;
+}
+.navbar-default .navbar-nav>li>a:hover {
+  color:#eee;
+}
+.navbar{
+  border:0;
+  box-shadow:0px 2px 3px rgba(128,128,128,0.5);
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+  background:rgba(255,255,255,1);
+  color:rgb(32, 79, 117);
+}
+.navbar-wrap .decorative:after{
+  left:6%;
+  top:0;
+}
+.navbar-wrap .decorative:before{
+  left:-50%;
+}
+.margin-navigation{
+  margin-top:70px;
+}
+.marginup{
+  margin-top:40px;
+}
+.margintop{
+  margin-top:10%;
+}
+.alert { 
+  margin: 0 0 15px 0; 
+  padding: 10px; 
+  font-size: 12px; 
+  line-height:12px; 
+}
+.nav-avant-box{
+  width:50px;
+  height:50px;
+  padding:5px;
+}
+.nav-avant{
+  height:40px;
+  width:40px;
+  border-radius:22px;
+}
+.navbar-right{
+}
+.oscroll{
+  overflow:scroll;
+}
+.vcenter{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-box-align:center;
+}
+.hcenter{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-box-pack:center;
+}
+.vhcenter{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+}
+.navbar-brand{
+  color:#fff!important;
+}
+.navbar-brand.logo{
+  width:90px;
+  margin-left: -2px!important;
+  height:50px;
+  background-image:url(/img/tisan.png);
+  background-size:100%;
+  background-position-x: -2px;
+  background-position-y: 9px;
+  background-repeat:no-repeat;
+  -webkit-filter:invert(1);
+  filter:invert(1);
+}
+
+.vertical-wrap{
+	dipslay:-webkit-box;
+	-webkit-orient:vertical;
+	height:100%;
+	width:100%;
+}
+.horizontal{
+	display:-webkit-box;
+	-webkit-box-orient:horizontal;
+}

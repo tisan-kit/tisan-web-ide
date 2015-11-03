@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>工作区 - Tisan</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/page/common.css" rel="stylesheet">
+        <link href="/css/page/workspace.css" rel="stylesheet">
+        <script src="/js/page/common.js"></script>
+    </head>
+    <body>
+        <div class="margin-navigation">
+            <div class="row">
+				<%include navigation.ejs%>
+			</div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <div class="product-container">
+                        <ul>
+                            <%for(var i in product){%>
+                            <li class="product" data-id="<%=product[i].id%>">
+                                <img class="product-img" src="<%=product[i].avatar?product[i].avatar:'/img/default.png'%>" style="top:48%">
+                                    <div class="product-head">
+                                        <div class="product-intro">
+                                            <%=product[i].descript%>
+                                        </div>
+                                    </div>
+                                    <div class="product-foot">
+                                        <div class="product-name">
+                                            <%=product[i].name%>
+                                        </div>
+                                        <div class="product-description">
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="btn btn-primary btn-edit" onclick="location.href='/product/<%=product[i].id%>'">编辑</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            <%}%>
+                            <li class="product btn-product-add" onclick="location.href='/product'">
+                                <div class="product-head">
+                                    <div class="product-img">+</div>
+                                </div>
+                                <div class="product-foot">
+                                        <div class="buttons">
+                                            <button class="btn btn-primary text-product-add">添加产品</button>
+                                        </div>
+                                </div>
+                            </li>
+                            <%for(var i=0;i<5;++i){%>
+                                <li class="product" style="visibility:hidden">
+                                </li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </body>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/page/login.js"></script>
+    <script src="/js/page/workspace.js"></script>
+</html>

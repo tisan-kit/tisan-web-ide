@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/iotboard/widgets/temperature/temperature.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/temperature/temperature.widget.min.js"></script>
+<script type="text/html" id="template-temperature">
+	<#if(title){#>
+		<div class="title"><#=title#></div>
+	<#}#>
+<div class="colorpicker">
+</div>
+<div class="preview">
+    <div class="container">
+        <div class="de">
+            <div class="den">
+              <div class="dene">
+                <div class="denem">
+                  <div class="deneme"><w class="temmperature-text"><#=status.temperature#></w><span><#if(status.temperature!='-'){#>.0<#}#></span><strong>&deg;</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-refresh am-btn-success">REFRESH</button>
+<div class="clf"></div>
+</script>

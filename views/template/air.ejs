@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/iotboard/widgets/air/air.widget.min.css" media="screen" type="text/css" />
+<script src="/iotboard/widgets/air/air.widget.min.js"></script>
+<script type="text/html" id="template-air">
+	<#if(title){#>
+		<div class="title"><#=title#></div>
+	<#}#>
+<div class="preview">
+    <div class="air-wrap">
+        <div class="progress-circle-outer animate">
+        </div>
+        <div class="progress-circle-inner">
+            <span class="number mark"><#=status.mark#></span>
+            <span class="unit">ppm</span>
+        </div>
+    </div>
+</div>
+<div class="clf"></div>
+</script>

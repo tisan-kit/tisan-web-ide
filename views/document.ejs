@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/page/common.css" rel="stylesheet">
+		<link href="/css/gfm.css" rel="stylesheet">
+        <script src="/js/page/common.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<%include navigation.ejs%>
+			<div class="row margin-navigation">
+				<div class="col-md-offset-1 col-md-2">
+                    <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+						<li role="presentation" class="<%if(page=='quick-start'){%>active<%}%>">
+							<a href="/document/quick-start">快速开始</a>
+						</li>
+						<li role="presentation" class="<%if(page=='hardware'){%>active<%}%>">
+							<a href="/document/hardware">硬件介绍</a>
+						</li>
+						<li role="presentation" class="<%if(page=='environment'){%>active<%}%>">
+							<a href="/document/environment">开发环境</a>
+						</li>
+						<li role="presentation" class="<%if(page=='development-guide'){%>active<%}%>">
+							<a href="/document/development-guide">开发指南</a>
+						</li>
+						<li role="presentation" class="<%if(page=='demo'){%>active<%}%>">
+							<a href="/document/demo">实例说明</a>
+						</li>
+						<li role="presentation" class="<%if(page=='wechat-support'){%>active<%}%>">
+							<a href="/document/wechat-support">微信支持</a>
+						</li>
+						<li role="presentation" class="<%if(page=='faq'){%>active<%}%>">
+							<a href="/document/faq">常见问题</a>
+						</li>
+					</ul>
+				</div>
+				<div class="markdown-body col-md-8"style="margin-bottom:100px">
+					<%=data%>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+	</body>
+	<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/page/login.js"></script>
+	<script type="text/javascript">
+		$("a").target="_blank";
+		$(document).ready(function(){
+   			$('.markdown-body').html($('.markdown-body').text());
+		})
+	</script>
+</html>

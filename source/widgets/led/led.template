@@ -1,0 +1,37 @@
+<#if(title){#>
+<div class="title"><#=title#></div>
+<#}#>
+<div class="colorpicker">
+    <canvas class="picker" width="200" height="200"></canvas>
+</div>
+<div class="preview">
+    <div>
+        <label>R</label>
+        <input type="text" class="rPrev" style="background-color:#<#=status["red"].toString(16)#>0000"/>
+    </div>
+    <div>
+        <label>G</label>
+        <input type="text" class="gPrev" style="background-color:#00<#=status["red"].toString(16)#>00"/>
+    </div>
+    <div>
+        <label>C</label>
+        <input type="text" class="bPrev" style="background-color:#0000<#=status["red"].toString(16)#>"/>
+    </div>
+</div>
+<div class="clf"></div>
+<div class="controls">
+    <input type="hidden" class="rVal" value="<#=status["red"]#>"/>
+    <input type="hidden" class="gVal" value="<#=status["green"]#>"/>
+    <input type="hidden" class="bVal" value="<#=status["blue"]#>"/>
+    <div>
+        <label>Freq(<span class="freqVal"><#=status["freq"]#></span>)</label>
+        <input type="range" class="freqCtrl" min="1" max="1000" value="<#=status["freq"]#>"/>
+    </div>
+    <div>
+        <label>W(<span class="wVal"><#=status["white"]#></span>)</label> 
+        <input type="range" class="wCtrl" min="0" max="255" value="<#=status["white"]#>"/>
+    </div>
+</div>
+<button class="am-btn am-btn-default am-btn-xs  am-radius btn-refresh am-btn-success">REFRESH</button>
+<button class="am-btn am-btn-default am-btn-xs am-radius btn-set am-btn-primary">SET</button>
+<div class="clf"></div>
