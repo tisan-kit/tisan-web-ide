@@ -188,16 +188,23 @@ router.get('/webapp/:id',function(req,res){
   }else{
     isWechat=true;  
   }
-  grpc.readProduct([parseInt(req.params['id'])],function(result,error){
-    var data=[];
-    if(result.products[0].config.length!=0){
-      data=JSON.parse(result.products[0].config);
+  Objects.find({where:{is_public:1}}).then(function(result){
+    var objects = {};
+    for(var i=0; i<result.length; i++) {
+      objects[result[i]["id"]] = result[i]; 
     }
-    res.render('iot',{
-      objects:data,
-      isWechat:isWechat 
-    });
-  })
+    grpc.readProduct([parseInt(req.params['id'])],function(result,error){
+      var data=[];
+      if(result.products[0].config.length!=0){
+        data=JSON.parse(result.products[0].config);
+      }
+      res.render('iot',{
+        config:data,
+        isWechat:isWechat,
+        objects: objects
+      });
+    })
+  });
 })
 //如果没有登录态的用户
 function authMiddle(req,res,next){

@@ -9,135 +9,27 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
   <!-- add iotboard common css and js in the first place -->
-  <link rel="stylesheet" href="/iotboard/css/iotboard.min.css" media="screen" type="text/css" />
-  <link rel="stylesheet" href="/iotboard/css/amazeui/amazeui.min.css" media="screen" type="text/css" />
-  <script src="/js/zepto.min.js"></script>
-  <script src="/iotboard/js/arttemplate/template-native.js"></script>
-  <script src="/iotboard/js/iotboard.min.js"></script>
-  <script>
-		function GetQueryString(name) {
-			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
-			var r = window.location.search.substr(1).match(reg);
-			if (r!=null&&r.length>1) return (r[2]); return null;
-		}
-		if(GetQueryString('from')=='wechat'){
-			iotboard.identifier=GetQueryString('identifier');
-		}
-  </script>
-  <%if(!isWechat){%>
-  <script src="/iotboard/models/freeiot.model.min.js"></script>
-  <%}else{%>
-  <script src="/iotboard/models/wechat.model.min.js"></script>
-  <%}%>
-  <!--
-  <script src="/iotboard/js/amazeui/amazeui.min.js"></script>
-  -->
+  <link rel="stylesheet" href="/iotboard/iotboard.min.css" media="screen" type="text/css" />
+  <script src="/iotboard/iotboard.min.js"></script>
 
-  <% var id2label={
-    '1':'led',
-    '2':'motor',
-    '3':'plug',
-    '4':'air',
-    '5':'text',
-    '6':'pm25',
-    '7':'temperature',
-    '8':'humiture'
-    //'9':'光敏??'
-  };
-  
-    var statistics={
-    };
-    for(var i in objects.objects){
-	  var label=id2label[objects.objects[i].id]?id2label[objects.objects[i].id]:'default';
-      statistics[label]=statistics[label]>=0?statistics[label]+1:1;
-    }
-  %>
+  <!-- add widgets css and js files here -->
+  <link rel="stylesheet" href="/iotboard/widgets.min.css" media="screen" type="text/css" />
+  <script src="/iotboard/widgets.min.js"></script>
+  <!-- -->
 
-  <%for(var i in statistics){%>
-    <%if(statistics[i]>0){%>
-      <%if(i=='led'){%>
-        <%include ./template/led.ejs%>
-      <%}else if(i=='plug'){%>
-        <%include ./template/plug.ejs%>
-      <%}else if(i=='text'){%>
-        <%include ./template/text.ejs%>
-      <%}else if(i=='motor'){%>
-        <%include ./template/motor.ejs%>
-      <%}else if(i=='humiture'){%>
-        <%include ./template/humiture.ejs%>
-      <%}else if(i=='temperature'){%>
-        <%include ./template/temperature.ejs%>
-      <%}else if(i=='pm25'){%>
-        <%include ./template/pm25.ejs%>
-      <%}else if(i=='air'){%>
-        <%include ./template/air.ejs%>
-	  <%}else{%>
-        <%include ./template/default.ejs%>
-	  <%}%>
-    <%}%>
-  <%}%>
+  <!-- model to use here -->
+  <script src="/iotboard/freeiot.model.min.js"></script>
+  <!-- -->
 </head>
 <body>
-  <!--
-  <div class="widget" iotb-widget="text" data-label="text" data-title="text"></div>
-  <div class="widget" iotb-widget="plug" data-label="plug" data-title="开关1"></div>
-  <div class="widget" iotb-widget="led" data-label="led" data-title="灯泡"></div>
-  <div class="widget" iotb-widget="motor" data-label="motor" data-title="电机"></div>
-  <div class="widget" iotb-widget="thermohygrometer" data-label="humiture" data-title="温度湿度计"></div>
-  <div class="widget" iotb-widget="temperature" data-label="temperature" data-title="温度计"></div>
-  <div class="widget" iotb-widget="humiture" data-label="humiture" data-title="湿度计"></div>
-  <div class="widget" iotb-widget="pm25" data-label="pm25" data-title="pm2.5"></div>
-  <div class="widget" iotb-widget="air" data-label="air" data-title="空气质量"></div>
-  -->
+  <% for(var i=0; i<config.objects.length; i++) {
+    var object = config.objects[i];
+    if(objects[object.id]){
+  %>
+  <div class="widget" iotb-widget="<%=objects[object.id].label%>" data-label="<%=object.label%>" data-title="<%=object.label%>"></div>
+  <% } else {%>
+  <div class="widget" iotb-widget="default" data-label="<%=object.label%>" data-title="<%=object.label%>" data-config='<%=JSON.stringify(object.status)%>'></div>
+  <% }%>
+  <% } %>
 </body>
-<script id='template-widgets' type="text/html">
-<#
-var id2label={
-    '1':'led',
-    '2':'motor',
-    '3':'plug',
-    '4':'air',
-    '5':'text',
-    '6':'pm25',
-    '7':'temperature',
-    '8':'humiture'
-    //'9':'光敏??'
-  };
-#>
-
-<#for(var i in objects){#>
-  <#var enName=id2label[objects[i].id]?id2label[objects[i].id]:'default';#>
-  <div class="widget" iotb-widget="<#=enName#>" data-label="<#=enName#>" data-title="<#=objects[i].label#>" data-id="<#=objects[i].id#>" data-no="<#=objects[i].no#>"></div>
-<#}#>
-</script>
-<script>
-var product_id=(location.href).split('?')[0].split('/');
-product_id=product_id[product_id.length-1];
-console.log(product_id);
-
-var addedWidgets={};
-
-//$.get('/product/detail/'+product_id,function(r){
-		var objects=JSON.parse('<%-JSON.stringify(objects.objects)%>');
-		addedWidgets.objects=objects;
-		//addedWidgets.objects=r.inobjects.objects?r.inobjects.objects:[];
-		console.log(addedWidgets.objects);
-		$('body').append(template('template-widgets',addedWidgets));
-		setTimeout(function(){
-		initIot();
-		$('.widget [iotb-widget=default]').each(function(){
-			var id=$(this).attr('data-id');
-			var no=$(this).attr('data-no');
-			var w;
-			for(var i in addedWidgets.objects){
-				if(addedWidgets.objects[i].id==id&&addedWidgets.objects[i].no==no){
-					w=addedWidgets.objects[i];
-					break;
-				}
-			}
-
-		});
-		},500);
-//});
-</script>
 </html>
