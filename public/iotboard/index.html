@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IOT Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <!-- add iotboard common css and js in the first place -->
+  <link rel="stylesheet" href="iotboard.min.css" media="screen" type="text/css" />
+  <script src="iotboard.min.js"></script>
+
+  <!-- add widgets css and js files here -->
+  <link rel="stylesheet" href="widgets.min.css" media="screen" type="text/css" />
+  <script src="widgets.min.js"></script>
+  <!-- -->
+
+  <!-- model to use here -->
+  <script src="dummy.model.min.js"></script>
+  <!-- -->
+</head>
+<body>
+  <div class="widget" iotb-widget="temperature" data-label="temperature" data-title="温度"></div>
+  <div class="widget" iotb-widget="pm25" data-label="pm25" data-title="PM2.5"></div>
+  <div class="widget" iotb-widget="text" data-label="text" data-title="消息"></div>
+  <div class="widget" iotb-widget="plug" data-label="text" data-title="开关"></div>
+  <div class="widget" iotb-widget="humiture" data-label="humiture" data-title="湿度"></div>
+  <div class="widget" iotb-widget="air" data-label="air" data-title="空气质量"></div>
+  <div class="widget" iotb-widget="motor" data-label="motor" data-title="电机"></div>
+  <div class="widget" iotb-widget="led" data-label="led" data-title="三色灯"></div>
+  <div class="widget" iotb-widget="default" data-label="default" data-title="自定义组件" data-config='[{"value_type": 2,"name": "temperature"},{"value_type": 5,"name": "pwm"},{"value_type": 11,"name": "text"}]'></div>
+</body>
+</html>
