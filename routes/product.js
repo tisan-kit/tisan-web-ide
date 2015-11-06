@@ -181,6 +181,7 @@ router.get('/qrcode/:id',function(req,res){
 
 //TODO  登录态
 router.get('/webapp/:id',function(req,res){
+  /*
   var key = (req.headers['user-agent']).toLowerCase();
   var isWechat;
   if(key.indexOf('micromessenger')==-1){
@@ -188,8 +189,10 @@ router.get('/webapp/:id',function(req,res){
   }else{
     isWechat=true;  
   }
-  Objects.find({where:{is_public:1}}).then(function(result){
+  */
+  Objects.findAll({where:{is_public:1}}).then(function(result){
     var objects = {};
+    console.dir(result)
     for(var i=0; i<result.length; i++) {
       objects[result[i]["id"]] = result[i]; 
     }
@@ -200,7 +203,7 @@ router.get('/webapp/:id',function(req,res){
       }
       res.render('iot',{
         config:data,
-        isWechat:isWechat,
+        from:req.query.from,
         objects: objects
       });
     })

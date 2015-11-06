@@ -18,7 +18,11 @@
   <!-- -->
 
   <!-- model to use here -->
+  <% if(from=='ide') { %>
+  <script src="/iotboard/dummy.model.min.js"></script>
+  <% } else {%>
   <script src="/iotboard/freeiot.model.min.js"></script>
+  <% } %>
   <!-- -->
 </head>
 <body>
