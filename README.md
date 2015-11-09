@@ -13,4 +13,5 @@ The Web IDE Source Code. Written in NodeJS.
 1. install pando iot cloud.
 2. download source.
 3. `npm install`
-4. `node app.js`
+4. create a `config/deploy.json` file, following the `config/deploy.example.json` example
+5. `node app.js`
