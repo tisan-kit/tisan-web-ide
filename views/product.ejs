@@ -80,7 +80,6 @@
 			"uint64",
 			"char*",
 			"char*",
-			"bool"
 		];
 		#>
 			<#for(var i in statuses){#>
@@ -556,7 +555,7 @@
 				$('.select-status').each(function(){
 					var parent=$(this).closest('.widget-status');
 					var name=parent.find('.input-status-name').val();
-					var type=$(this).val();
+					var type=parseInt($(this).val());
 					if(name.length>0){
 						status.push({
 							name:name,
@@ -567,7 +566,7 @@
 				var name=$('#custom-editor-name').val();
 
 				var label='labelname';
-				var id=$('#custom-widget-editor').attr('data-id');
+				var id=parseInt($('#custom-widget-editor').attr('data-id'));
 				var object={
 					name:name,
 					c_code:'',
