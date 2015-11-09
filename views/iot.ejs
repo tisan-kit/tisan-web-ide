@@ -26,7 +26,8 @@
   <!-- -->
 </head>
 <body>
-  <% for(var i=0; i<config.objects.length; i++) {
+  <% if( config.objects ) { 
+    for(var i=0; i<config.objects.length; i++) {
     var object = config.objects[i];
     if(objects[object.id]){
   %>
@@ -34,6 +35,7 @@
   <% } else {%>
   <div class="widget" iotb-widget="default" data-label="<%=object.label%>" data-title="<%=object.label%>" data-config='<%=JSON.stringify(object.status)%>'></div>
   <% }%>
+  <% } %>
   <% } %>
 </body>
 </html>

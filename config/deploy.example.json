@@ -1,5 +1,5 @@
 {
-  "msg":"这是线上配置",
+  "msg":"这是部署配置文件",
   "host":"http://localhost", 
   "listenPort" :8000, 
   "redis":{
@@ -31,7 +31,7 @@
   }],
   "mailoptions":{
     "from":"<tisan@pandocloud.com",
-    "subject":"Tisan帐号验证",
+    "subject":"Tisan账号验证",
     "to":""
   },
   "iframe":"http://localhost/product/webapp/",
