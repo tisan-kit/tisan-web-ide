@@ -7,7 +7,7 @@ var Objects = DbSequelize.define("tbl_object",{
   "c_code": { type: Sequelize.CHAR(1000)},
   "status": { type: Sequelize.CHAR(5000)},
   "label": { type: Sequelize.CHAR(100)},
-  "is_public": { type: Sequelize.CHAR(2)},
+  "is_public": { type: Sequelize.INTEGER},
   "user_id":{type:Sequelize.INTEGER},
   "delete":{type:Sequelize.CHAR(2)},
 },{
