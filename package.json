@@ -9,6 +9,16 @@
     "grunt-contrib-uglify": "^0.9.2"
   },
   "dependencies": {
-    "autolinker": "^0.18.1"
+    "autolinker": "^0.18.1",
+    "connect-redis": "^3.0.1",
+    "express-session": "^1.12.1",
+    "formidable": "^1.0.17",
+    "json5": "^0.4.0",
+    "mysql": "^2.9.0",
+    "nodemailer": "^1.10.0",
+    "redis": "^2.3.1",
+    "remarkable": "^1.6.1",
+    "sequelize": "^3.14.1",
+    "underscore": "^1.8.3"
   }
 }
