@@ -36,6 +36,5 @@
   },
   "iframe":"http://localhost/product/webapp/",
   "grpc":["localhost:20311"],
-  "docUrl":"http://localhost/docoment/iframe",
-  "include":["./localhost.json"]
+  "docUrl":"http://localhost/docoment/iframe"
 }
